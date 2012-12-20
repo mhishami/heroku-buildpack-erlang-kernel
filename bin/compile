@@ -19,6 +19,7 @@ tarball=${ver}.tgz
 OTP_TARBALL_URL="https://s3.amazonaws.com/heroku-buildpack-erlang/${tarball}"
 ERLROOT=${build}/otp
 OTP_DIR=${HOME}/otp
+PROFILE=${HOME}/.profile.d
 
 echo "-----> Using Erlang/OTP $ver"
 
@@ -58,5 +59,8 @@ if [ ${PIPESTATUS[0]} -ne 0 ]; then
   echo "-----> Build failed"
   exit 1
 fi
+
+mkdir ${PROFILE}
+cp ${bpdir}/opt/otp.sh ${PROFILE}
 
 echo "-----> Build succeeded"
